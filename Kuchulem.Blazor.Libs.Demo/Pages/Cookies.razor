@@ -1,0 +1,84 @@
+﻿@page "/cookie-demo"
+
+@inject Blazor.Libs.Cookies.CookieBaker cookieBaker
+
+<h3>Cookies</h3>
+
+<h4>Hey ! Welcome, get a cookie, they are yummy :</h4>
+<EditForm Model="@GetCookieModel" OnValidSubmit="OnGetCookieValidSubmit">
+    <p><label for="get-cookie-input">Cookie key : </label><InputText id="get-cookie-input" @bind-Value="@GetCookieModel.Key" /></p>
+    <p>
+        Value : 
+        @if(string.IsNullOrEmpty(GetCookieModel.Result))
+        {
+            <em>No data</em>
+        }
+        else
+        {
+            @GetCookieModel.Result
+        }
+    </p>
+    <p><button type="submit">Let's eat that cookie !</button></p>
+</EditForm>
+
+<h4>Want to bake your own cookie ?</h4>
+<EditForm Model="@EditCookieModel" OnValidSubmit="OnCookieEditionValidSubmit">
+    <p><label for="set-cookie-key-input">Cookie key : </label><InputText id="set-cookie-key-input" @bind-Value="@EditCookieModel.Key" /></p>
+    <p><label for="set-cookie-value-input">Cookie value : </label><InputText id="set-cookie-value-input" @bind-Value="@EditCookieModel.Data" /></p>
+    <p><label for="set-cookie-date-input">Expiration date : </label><InputDate id="set-cookie-date-input" @bind-Value="@EditCookieModel.ExpirationDate" /></p>
+    <p><label for="set-cookie-date-input">Ignore expiration date : </label><InputCheckbox id="set-cookie-ignoredate-input" @bind-Value="@EditCookieModel.NoExpirationDate" /></p>
+    <p><button type="submit">Let's bake that cookie</button></p>
+</EditForm>
+
+<h4>Didn't like your cookie ? let's drop it.</h4>
+<EditForm Model="@DropCookieModel" OnValidSubmit="OnDropCookieValidSubmit">
+    <p><label for="drop-cookie-input">Cookie key : </label><InputText id="drop-cookie-input" @bind-Value="@DropCookieModel.Key" /></p>
+    <p><button type="submit">Let's trash that cookie !</button></p>
+</EditForm>
+
+
+@code {
+    private Data.EditCookieModel EditCookieModel = new Data.EditCookieModel();
+    private Data.GetCookieModel GetCookieModel = new Data.GetCookieModel();
+    private Data.DropCookieModel DropCookieModel = new Data.DropCookieModel();
+
+    private async void OnCookieEditionValidSubmit()
+    {
+        DateTime? ExpirationDate = null;
+        if (!EditCookieModel.NoExpirationDate)
+            ExpirationDate = EditCookieModel.ExpirationDate;
+
+        await cookieBaker.SetAsync(EditCookieModel.Key, EditCookieModel.Data, ExpirationDate);
+
+        if (EditCookieModel.Key == GetCookieModel.Key)
+        {
+            await UpdateGetCookieModel().ConfigureAwait(true);
+            StateHasChanged();
+        }
+    }
+
+    private async void OnGetCookieValidSubmit()
+    {
+        await UpdateGetCookieModel().ConfigureAwait(true);
+        StateHasChanged();
+    }
+
+    private async void OnDropCookieValidSubmit()
+    {
+        await cookieBaker.UnsetAsync(DropCookieModel.Key).ConfigureAwait(true);
+
+        if (DropCookieModel.Key == GetCookieModel.Key)
+        {
+            await UpdateGetCookieModel().ConfigureAwait(true);
+            StateHasChanged();
+        }
+    }
+
+    private async Task UpdateGetCookieModel()
+    {
+        if (string.IsNullOrEmpty(GetCookieModel.Key))
+            GetCookieModel.Result = null;
+        else
+            GetCookieModel.Result = await cookieBaker.GetAsync(GetCookieModel.Key);
+    }
+}

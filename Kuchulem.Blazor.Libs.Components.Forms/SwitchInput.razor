@@ -1,0 +1,67 @@
+﻿@inherits Microsoft.AspNetCore.Components.Forms.InputBase<bool>
+
+<div class="switchinput">
+    <input type="checkbox" id=@Id @onchange=@OnInputChanged />
+    <label for=@Id>
+        <span></span>
+    </label>
+</div>
+
+@code {
+
+
+    private string id;
+
+    [Parameter]
+    public string Id
+    {
+        get => id ??= Guid.NewGuid().ToString();
+        set => id = value;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+
+        }
+    }
+
+    protected override bool TryParseValueFromString(string value, [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out bool result, [System.Diagnostics.CodeAnalysis.NotNullWhen(false)] out string validationErrorMessage)
+    {
+        bool? tempResult = value switch
+        {
+            // "on" state
+            "1" => true,
+            "true" => true,
+            "right" => true,
+            "on" => true,
+            // "off" state
+            "0" => false,
+            "false" => false,
+            "left" => false,
+            "off" => false,
+            _ => null
+        };
+
+        if (tempResult is bool boolResult)
+        {
+            result = boolResult;
+            validationErrorMessage = null;
+            return true;
+        }
+        else
+        {
+            result = false;
+            validationErrorMessage = $"Invalid value for swtich : '{value}'";
+            return false;
+        }
+    }
+
+    private async void OnInputChanged(ChangeEventArgs ev)
+    {
+        await ValueChanged.InvokeAsync(ev.Value as bool? ?? false);
+    }
+}

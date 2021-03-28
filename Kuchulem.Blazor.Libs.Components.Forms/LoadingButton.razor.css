@@ -1,0 +1,129 @@
+﻿.loading-button {
+    display: block;
+    width: 100%;
+    height: 3em;
+    line-height: 3em;
+    margin: auto;
+    border: solid 1px #333;
+    transition: width .5s;
+    border-radius: 1.5em;
+    background: #fff;
+    text-align: center;
+    outline: none;
+    position: relative;
+}
+
+    .loading-button:active {
+    }
+
+    .loading-button .loading-button-text {
+        height: 3em;
+        line-height: 3em;
+        display: block;
+        margin: auto;
+        transition: opacity .2s;
+    }
+
+    .loading-button.loading-button--feedback {
+        width: 3em;
+    }
+
+    .loading-button svg, .loading-button ::deep .loader-circle {
+        display: block;
+        position: absolute;
+        opacity: 0;
+    }
+
+    .loading-button ::deep .loader-circle {
+        top: calc(50% - .5em);
+        left: calc(50% - .5em);
+        opacity: 0;
+    }
+
+    .loading-button svg {
+        width: 2em;
+        height: 2em;
+        top: calc(50% - 1em);
+        left: calc(50% - 1em);
+    }
+
+        .loading-button svg path {
+            transition: all .5s;
+            transition: opacity none;
+        }
+
+        .loading-button svg rect {
+            fill: #333;
+            stroke: none;
+            stroke-width: 0;
+            height: 0;
+            transition: height .3s;
+        }
+
+            .loading-button svg rect.success-rect-2 {
+                transition-delay: .3s;
+            }
+
+            .loading-button svg rect.success-group-1 {
+                transform: translate(10px, 115px);
+            }
+
+            .loading-button svg rect.success-rect-1 {
+                transform: rotate(-45deg);
+            }
+
+            .loading-button svg rect.success-group-2 {
+                transform: translate(80px, 176px) rotate(9deg);
+            }
+
+    .loading-button.loading-button--working .loading-button-icon-working .working-group-1 {
+        transform-origin: center center;
+        animation-name: wroking-1-rotation;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+
+    .loading-button.loading-button--working .loading-button-icon-working .working-group-2 {
+        transform-origin: center center;
+        animation-name: wroking-1-rotation;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+    }
+
+    .loading-button.loading-button--feedback .loading-button-text {
+        opacity: 0;
+    }
+
+    .loading-button.loading-button--success .loading-button-icon-success {
+        opacity: 1;
+    }
+
+        .loading-button.loading-button--success .loading-button-icon-success .success-rect-1 {
+            height: 120.7px;
+        }
+
+        .loading-button.loading-button--success .loading-button-icon-success .success-rect-2 {
+            height: 175px;
+        }
+
+    .loading-button.loading-button--failure .loading-button-icon-failure {
+        opacity: 1;
+    }
+
+    .loading-button.loading-button--working .loading-button-icon-working {
+        opacity: 1;
+    }
+
+    .loading-button.loading-button--working ::deep .loader-circle {
+        opacity: 1;
+    }
+
+@keyframes wroking-1-rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
