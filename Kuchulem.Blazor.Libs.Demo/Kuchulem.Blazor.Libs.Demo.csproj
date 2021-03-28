@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kuchulem.Blazor.Libs.Components.Forms\Kuchulem.Blazor.Libs.Components.Forms.csproj" />
+    <ProjectReference Include="..\Kuchulem.Blazor.Libs.CookieBaker\Kuchulem.Blazor.Libs.Cookies.csproj" />
+  </ItemGroup>
+
+</Project>
