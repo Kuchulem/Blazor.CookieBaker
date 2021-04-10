@@ -1,41 +1,43 @@
-﻿<button type=@Type class="@Css loading-button--feedback loading-button--working loading-button" disabled=@disabled>
+﻿@using LoadingButtonComponent
+
+<button type=@Type class="@Css loading-button" disabled=@disabled style="border-color:@ButtonBordersColor">
     <span class="loading-button-text">
         @ChildContent
     </span>
     <svg class="loading-button-icon-failure"
          viewBox="0 0 200 200">
-        <path d="M 20 20 L 180 180" />
-        <path d="M 180 20 L 20 180" />
+        <path d="M 20 20 L 180 180" stroke="@Colors.FailureIcon" />
+        <path d="M 180 20 L 20 180" stroke="@Colors.FailureIcon" />
     </svg>
     <svg class="loading-button-icon-success"
-         viewBox="0 0 200 200" 
+         viewBox="0 0 200 200"
          style="enable-background:new 0 0 200 200;"
          xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          x="0px"
          y="0px">
-        <g class="success-group-1" 
-           transform="translate(13.3,95)">
-            <rect class="success-rect-1" 
-                  style="fill:#000000;"
-                  x="0"
-                  y="0" 
-                  width="6" 
-                  height="0" 
-                  rx="3" 
-                  transform="rotate(-25.4)">
+    <g class="success-group-1"
+       transform="translate(13.3,95)">
+    <rect class="success-rect-1"
+          style="fill:@Colors.SuccessIcon;"
+          x="0"
+          y="0"
+          width="6"
+          height="0"
+          rx="3"
+          transform="rotate(-25.4)">
             </rect>
-        </g>
-        <g class="success-group-2" 
-           transform="translate(100,180)">
-            <rect class="success-rect-2" 
-                  style="fill:#000000;" 
-                  x="0" 
-                  y="0" 
-                  width="6" 
-                  height="0" 
-                  rx="3" 
-                  transform="rotate(-150)">
+            </g>
+    <g class="success-group-2"
+       transform="translate(100,180)">
+    <rect class="success-rect-2"
+          style="fill:@Colors.SuccessIcon;"
+          x="0"
+          y="0"
+          width="6"
+          height="0"
+          rx="3"
+          transform="rotate(-150)">
             </rect>
         </g>
     </svg>
@@ -44,26 +46,29 @@
          xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          viewBox="0 0 400 400">
-        <g  class="working-group-1">
-            <path class="working-path-1"
-                  stroke-width="15"
-                  stroke="#333333"
-                  fill="none"
-                  shape-rendering="geometricPrecision"
-                  d=" M 380 200 A 180 180 0 1 1 200 20" />
+    <g class="working-group-1">
+    <path class="working-path-1"
+          stroke-width="15"
+          stroke="@Colors.WorkingIcon"
+          fill="none"
+          shape-rendering="geometricPrecision"
+          d=" M 380 200 A 180 180 0 1 1 200 20" />
         </g>
-        <g  class="working-group-2">
-            <path class="working-path-2"
-                  stroke-width="15"
-                  stroke="#333333"
-                  fill="none"
-                  shape-rendering="geometricPrecision"
-                  d=" M 380 200 A 180 180 0 0 1 20 200" />
+    <g class="working-group-2">
+    <path class="working-path-2"
+          stroke-width="15"
+          stroke="@Colors.WorkingIcon"
+          fill="none"
+          shape-rendering="geometricPrecision"
+          d=" M 380 200 A 180 180 0 0 1 20 200" />
         </g>
     </svg>
 </button>
 
 @code {
+    /// <summary>
+    /// That parameters allows you to add css classes to the root &lt;button&gt; tag
+    /// </summary>
     [Parameter]
     public string Css
     {
@@ -75,9 +80,29 @@
         set => css = value;
     }
 
+    /// <summary>
+    /// This parameter provides a <see cref="ColorScheme"/> to the button's borders, text and icons.<br/>
+    /// Default is <see cref="ColorScheme.Default"/> scheme
+    /// </summary>
+    [Parameter]
+    public ColorScheme ColorScheme { get; set; }
+
+    /// <summary>
+    /// Allows you to provide a type to the button (ie : <em>submit</em>)
+    /// </summary>
     [Parameter]
     public string Type { get; set; }
 
+    /// <summary>
+    /// Sets the <see cref="WorkingState"/> of the button. Changing the state will also
+    /// change its display.
+    /// <list type="bullet">
+    /// <item>When <see cref="WorkingState.None"/> the button's <see cref="ChildContent"/> is displayed</item>
+    /// <item>When <see cref="WorkingState.Failure"/> the button's failure icon is displayed</item>
+    /// <item>When <see cref="WorkingState.Success"/> the button's success icon is displayed</item>
+    /// <item>When <see cref="WorkingState.Working"/> the button's loader is displayed</item>
+    /// </list>
+    /// </summary>
     [Parameter]
     public WorkingState State
     {
@@ -85,10 +110,12 @@
         set
         {
             state = value;
-            //StateHasChanged();
         }
     }
 
+    /// <summary>
+    /// Provides content to the root &lt;button&gt; tag.
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent
     {
@@ -107,9 +134,20 @@
     private string css;
     private string stateCss => State switch
     {
-        WorkingState.None => "",
         WorkingState.Failure => "loading-button--feedback loading-button--failure",
         WorkingState.Success => "loading-button--feedback loading-button--success",
-        WorkingState.Working => "loading-button--feedback loading-button--working"
+        WorkingState.Working => "loading-button--feedback loading-button--working",
+        _ => ""
+    };
+    private ColorScheme Colors
+    {
+        get => ColorScheme ??= ColorScheme.Default;
+    }
+    private string ButtonBordersColor => State switch
+    {
+        WorkingState.Failure => Colors.FailureBorders ?? Colors.ButtonBorders,
+        WorkingState.Success => Colors.SuccessBorders ?? Colors.ButtonBorders,
+        WorkingState.Working => Colors.WorkingBorders ?? Colors.ButtonBorders,
+        _ => Colors.ButtonBorders
     };
 }

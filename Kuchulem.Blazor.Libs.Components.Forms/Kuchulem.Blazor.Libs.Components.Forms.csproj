@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Kuchulem</Authors>
+    <Description>A set of form components (inputs, buttons, etc.) to add to your blazor forms</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>2021 Kuchulem</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.0-beta.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>../doc/Kuchulem.Blazor.Libs.Components.Forms.xml</DocumentationFile>
   </PropertyGroup>
 
   

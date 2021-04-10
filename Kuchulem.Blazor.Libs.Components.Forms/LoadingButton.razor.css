@@ -47,34 +47,44 @@
         left: calc(50% - 1em);
     }
 
-        .loading-button svg path {
-            transition: all .5s;
-            transition: opacity none;
+    .loading-button .loading-button-icon-success path {
+        transition: all .5s;
+        transition: opacity none;
+    }
+
+    .loading-button .loading-button-icon-failure path {
+        stroke-width: 0;
+        transition: stroke-width .5s;
+    }
+
+    .loading-button .loading-button-icon-failure path:first-child {
+        transition-delay: .5s;
+    }
+
+    .loading-button svg rect {
+        fill: #333;
+        stroke: none;
+        stroke-width: 0;
+        height: 0;
+        width:.5em;
+        transition: height .3s;
+    }
+
+        .loading-button svg rect.success-rect-2 {
+            transition-delay: .3s;
         }
 
-        .loading-button svg rect {
-            fill: #333;
-            stroke: none;
-            stroke-width: 0;
-            height: 0;
-            transition: height .3s;
+        .loading-button svg rect.success-group-1 {
+            transform: translate(10px, 115px);
         }
 
-            .loading-button svg rect.success-rect-2 {
-                transition-delay: .3s;
-            }
+        .loading-button svg rect.success-rect-1 {
+            transform: rotate(-45deg);
+        }
 
-            .loading-button svg rect.success-group-1 {
-                transform: translate(10px, 115px);
-            }
-
-            .loading-button svg rect.success-rect-1 {
-                transform: rotate(-45deg);
-            }
-
-            .loading-button svg rect.success-group-2 {
-                transform: translate(80px, 176px) rotate(9deg);
-            }
+        .loading-button svg rect.success-group-2 {
+            transform: translate(80px, 176px) rotate(9deg);
+        }
 
     .loading-button.loading-button--working .loading-button-icon-working .working-group-1 {
         transform-origin: center center;
@@ -108,6 +118,10 @@
 
     .loading-button.loading-button--failure .loading-button-icon-failure {
         opacity: 1;
+    }
+
+    .loading-button.loading-button--failure .loading-button-icon-failure path {
+        stroke-width: .5em;
     }
 
     .loading-button.loading-button--working .loading-button-icon-working {
