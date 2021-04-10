@@ -1,12 +1,15 @@
 ﻿@page "/forms-demo"
 
+@using Components.Forms.LoadingButtonComponent
+
 <h3>Forms</h3>
 <p>Let's try some custom design form inputs :)</p>
 <EditForm Model=@Model OnValidSubmit=@OnValidSubmit>
-    <p><label for="switchinput">Switch input :</label><SwitchInput Id="switchinput" @bind-Value="Model.SwitchDemo" /> value : @Model.SwitchDemo</p>
+    <p><label for="switchinput">Switch input :</label><SwitchInput Id="switchinput" @bind-Value="Model.SwitchDemo" /> value : <code>@Model.SwitchDemo</code></p>
+    <p><em>If you select <code>false</code> the form loading button below with end up in <code>failure</code> state, if you select <code>true</code> the button will end up in <code>Success</code> state</em></p>
     <p>
-        <LoadingButton State=@FormState Type="submit">
-            <span>Test</span>
+        <LoadingButton State=@FormState Type="submit" ColorScheme=ColorScheme.Default>
+            Test
         </LoadingButton>
     </p>
 </EditForm>
@@ -15,14 +18,17 @@
 
     private FormsDemoModel Model { get; set; } = new FormsDemoModel();
 
-    private WorkingState FormState { get; set; }
+    private WorkingState FormState { get; set; } = WorkingState.None;
 
     private async void OnValidSubmit()
     {
         FormState = WorkingState.Working;
         StateHasChanged();
         await Task.Delay(3000).ConfigureAwait(true);
-        FormState = WorkingState.Success;
+        FormState = Model.SwitchDemo ? WorkingState.Success : WorkingState.Failure;
+        StateHasChanged();
+        await Task.Delay(1000).ConfigureAwait(true);
+        FormState = WorkingState.None;
         StateHasChanged();
     }
 }
