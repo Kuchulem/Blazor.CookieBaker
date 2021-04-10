@@ -66,6 +66,9 @@
 </button>
 
 @code {
+    /// <summary>
+    /// That parameters allows you to add css classes to the root &lt;button&gt; tag
+    /// </summary>
     [Parameter]
     public string Css
     {
@@ -77,12 +80,29 @@
         set => css = value;
     }
 
+    /// <summary>
+    /// This parameter provides a <see cref="ColorScheme"/> to the button's borders, text and icons.<br/>
+    /// Default is <see cref="ColorScheme.Default"/> scheme
+    /// </summary>
     [Parameter]
     public ColorScheme ColorScheme { get; set; }
 
+    /// <summary>
+    /// Allows you to provide a type to the button (ie : <em>submit</em>)
+    /// </summary>
     [Parameter]
     public string Type { get; set; }
 
+    /// <summary>
+    /// Sets the <see cref="WorkingState"/> of the button. Changing the state will also
+    /// change its display.
+    /// <list type="bullet">
+    /// <item>When <see cref="WorkingState.None"/> the button's <see cref="ChildContent"/> is displayed</item>
+    /// <item>When <see cref="WorkingState.Failure"/> the button's failure icon is displayed</item>
+    /// <item>When <see cref="WorkingState.Success"/> the button's success icon is displayed</item>
+    /// <item>When <see cref="WorkingState.Working"/> the button's loader is displayed</item>
+    /// </list>
+    /// </summary>
     [Parameter]
     public WorkingState State
     {
@@ -93,6 +113,9 @@
         }
     }
 
+    /// <summary>
+    /// Provides content to the root &lt;button&gt; tag.
+    /// </summary>
     [Parameter]
     public RenderFragment ChildContent
     {

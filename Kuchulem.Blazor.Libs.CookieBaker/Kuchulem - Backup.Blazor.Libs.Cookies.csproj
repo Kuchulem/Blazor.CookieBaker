@@ -3,16 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.0.0-beta.2</Version>
+    <Version>1.0.0-beta.1</Version>
     <Authors>Kuchulem</Authors>
     <Copyright>2021 Kuchulem</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Description>A blazor library to manage cookies</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>../doc/Kuchulem.Blazor.Libs.Cookies.xml</DocumentationFile>
+    <DocumentationFile>Kuchulem.Blazor.Libs.Cookies.xml</DocumentationFile>
   </PropertyGroup>
 
   

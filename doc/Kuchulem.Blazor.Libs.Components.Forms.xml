@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kuchulem.Blazor.Libs.Components.Forms</name>
+    </assembly>
+    <members>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.ButtonText">
+            <summary>
+            Color for the button's text
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.ButtonBorders">
+            <summary>
+            The coor of the button's borders when in <see cref="F:Kuchulem.Blazor.Libs.Components.Forms.WorkingState.None"/> state
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.SuccessIcon" -->
+        <!-- Badly formed XML comment ignored for member "P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.FailureIcon" -->
+        <!-- Badly formed XML comment ignored for member "P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.WorkingIcon" -->
+        <!-- Badly formed XML comment ignored for member "P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.SuccessBorders" -->
+        <!-- Badly formed XML comment ignored for member "P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.FailureBorders" -->
+        <!-- Badly formed XML comment ignored for member "P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.WorkingBorders" -->
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.Default">
+            <summary>
+            Provides a default color scheme. Usefull for testing and having a quick result.<br/>
+            It provides black borders and black text, with green success icon, blue working icon
+            and red failure icon
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.Alt">
+            <summary>
+            Provides a alternative color scheme. Usefull for testing and having a quick result.<br/>
+            It provides white borders and white text, with green success icon, blue working icon
+            and red failure icon
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.Css">
+            <summary>
+            That parameters allows you to add css classes to the root &lt;button&gt; tag
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.ColorScheme">
+            <summary>
+            This parameter provides a <see cref="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.ColorScheme"/> to the button's borders, text and icons.<br/>
+            Default is <see cref="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButtonComponent.ColorScheme.Default"/> scheme
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.Type">
+            <summary>
+            Allows you to provide a type to the button (ie : <em>submit</em>)
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.State">
+            <summary>
+            Sets the <see cref="T:Kuchulem.Blazor.Libs.Components.Forms.WorkingState"/> of the button. Changing the state will also
+            change its display.
+            <list type="bullet">
+            <item>When <see cref="F:Kuchulem.Blazor.Libs.Components.Forms.WorkingState.None"/> the button's <see cref="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.ChildContent"/> is displayed</item>
+            <item>When <see cref="F:Kuchulem.Blazor.Libs.Components.Forms.WorkingState.Failure"/> the button's failure icon is displayed</item>
+            <item>When <see cref="F:Kuchulem.Blazor.Libs.Components.Forms.WorkingState.Success"/> the button's success icon is displayed</item>
+            <item>When <see cref="F:Kuchulem.Blazor.Libs.Components.Forms.WorkingState.Working"/> the button's loader is displayed</item>
+            </list>
+            </summary>
+        </member>
+        <member name="P:Kuchulem.Blazor.Libs.Components.Forms.LoadingButton.ChildContent">
+            <summary>
+            Provides content to the root &lt;button&gt; tag.
+            </summary>
+        </member>
+    </members>
+</doc>
